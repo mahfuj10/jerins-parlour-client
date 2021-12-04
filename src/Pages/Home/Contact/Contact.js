@@ -9,7 +9,7 @@ const Contact = () => {
         height: '50px',
         background: '#FFFFFF',
         borderRadius: '5px',
-        border: "1px solid black"
+        border: "1px solid #b9b6b6"
     }
 
 

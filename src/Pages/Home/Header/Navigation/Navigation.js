@@ -39,6 +39,9 @@ const Navigation = () => {
           <Link to="/book">
             <Button color="inherit">Book</Button>
           </Link>
+          <Link to="/dashboard">
+            <Button color="inherit">Dashborad</Button>
+          </Link>
           <Link to="/">
             <Button color="inherit">HOME</Button>
           </Link>

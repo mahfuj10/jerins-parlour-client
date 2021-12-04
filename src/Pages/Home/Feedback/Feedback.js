@@ -8,7 +8,7 @@ const Feedback = () => {
     const [userFeedbacks, setUserFeedbacks] = useState([]);
 
     useEffect(() => {
-        fetch('/user.json')
+        fetch('https://radiant-hamlet-99209.herokuapp.com/review')
             .then(res => res.json())
             .then(data => setUserFeedbacks(data))
     }, [])
@@ -56,7 +56,9 @@ const Feedback = () => {
                     {
                         userFeedbacks.map(feedback => <Box >
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <img width="64" height="64" src={feedback?.image} alt="" />
+                                <img
+                                    style={{ borderRadius: "50%" }} width="64" height="64"
+                                    src={feedback?.image} alt="" />
                                 <Box sx={{ ml: 2 }}>
                                     <Typography variant="h5" sx={{ fontSize: 20, fontWeight: "600" }}>
                                         {feedback?.name}
@@ -66,7 +68,7 @@ const Feedback = () => {
                                     </Typography>
                                 </Box>
                             </Box>
-                            <Typography sx={{ mt: 2, textAlign: 'start', color: "#707070", width: "300px" }} variant="body2">{feedback?.description.slice(0, 120)}</Typography>
+                            <Typography sx={{ mt: 2, textAlign: 'start', color: "#707070", width: "300px" }} variant="body2">{feedback?.description?.slice(0, 120)}</Typography>
 
                         </Box>
                         )

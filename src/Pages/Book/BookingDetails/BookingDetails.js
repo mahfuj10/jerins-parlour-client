@@ -18,22 +18,22 @@ const BookingDetails = () => {
     }, [])
 
 
-    const handaleBookService = () => {
-        service.email = user?.email;
-        service.name = user?.displayName;
-        service.status = 'pending';
-        fetch('https://radiant-hamlet-99209.herokuapp.com/book', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(service)
-        })
-            .then(res => res.json())
-            .then(data => {
-                alert('sucessfully added')
-            })
-    }
+    // const handaleBookService = () => {
+    //     service.email = user?.email;
+    //     service.name = user?.displayName;
+    //     service.status = 'pending';
+    //     fetch('https://radiant-hamlet-99209.herokuapp.com/book', {
+    //         method: "POST",
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(service)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             alert('sucessfully added')
+    //         })
+    // }
 
     return (
         <Box>
@@ -43,7 +43,7 @@ const BookingDetails = () => {
 
             <TextField id="outlined-basic" sx={{ width: '70%' }} variant="outlined" value={service?.title} /> <br /><br />
 
-            <Button onClick={handaleBookService} variant="contained">Book Now</Button>
+            <Button variant="contained">Book Now</Button>
         </Box>
     );
 };

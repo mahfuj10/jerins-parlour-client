@@ -22,8 +22,12 @@ import {
     useRouteMatch
 } from "react-router-dom";
 import { Button } from '@mui/material';
+import MakeAdmin from '../MakeAdmin/MakeAdmin/MakeAdmin';
+import AddReivew from '../AddReivew/AddReivew';
+import MyOrder from '../MyOrder/MyOrder';
+import ManageOrder from '../ManageOrder/ManageOrder';
 
-const drawerWidth = 200;
+const drawerWidth = 300;
 
 function Dashboard(props) {
 
@@ -42,9 +46,9 @@ function Dashboard(props) {
             <Link to={`${url}`}><Button color="inherit">Book</Button></Link> <br />
             <Box>
                 <Link to={`${url}/bookinglist`}><Button color="inherit">Booking List</Button></Link> <br />
-                <Link to={`${url}/review`}><Button color="inherit">Review</Button></Link>
+                <Link to={`${url}/review`}><Button color="inherit">Add Review</Button></Link>
             </Box>
-            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link> <br />
             <Link to={`${url}/manageorder`}><Button color="inherit">Manage All Order</Button></Link> <br />
 
         </div>
@@ -109,20 +113,27 @@ function Dashboard(props) {
                 </Drawer>
             </Box>
             <Box
+                style={{ backgroundColor: "#F4F7FC", height: "100vh" }}
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
 
-                <Switch>
+                <Switch >
                     <Route exact path={path}>
-                        {/* <DashboardHome></DashboardHome> */}
+
                     </Route>
                     <Route path={`${path}/bookinglist`}>
-                        {/* <MakeAdmin></MakeAdmin> */}
+                        <MyOrder />
                     </Route>
                     <Route path={`${path}/review`}>
-                        {/* <AddDoctor></AddDoctor> */}
+                        <AddReivew />
+                    </Route>
+                    <Route path={`${path}/makeAdmin`}>
+                        <MakeAdmin />
+                    </Route>
+                    <Route path={`${path}/manageorder`}>
+                        <ManageOrder />
                     </Route>
                 </Switch>
 

@@ -14,7 +14,7 @@ const Header = () => {
         <Box sx={headerStyle}>
             <Container sx={{ pt: 20 }}>
                 <Grid container sx={{ alignItems: "center" }} spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                         <Typography variant="h3" sx={{ fontWeight: 'bold', fontSize: "48px", mb: 2 }}>
                             BEAUTY SALON <br />
                             FOR EVERY WOMEN
@@ -24,7 +24,7 @@ const Header = () => {
                         <Button variant="contained" sx={{ backgroundColor: "#F73E7B", borderRadius: '5px', py: 1 }}>Get An Appoinment</Button>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                         <img width='484px' height='478px' src={girlImage} alt="headerBannerImage" />
                     </Grid>
 
