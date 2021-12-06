@@ -30,9 +30,9 @@ const MakeAdmin = () => {
     }
 
     return (
-        <Box>
-            <TextField type="email" onChange={onAdminEmailValue} />
-            <Button variant="contained" onClick={handaleMakeAdmin}> Save </Button>
+        <Box sx={{ backgroundColor: "white", p: 10, width: "50%" }}>
+            <TextField sx={{ width: "60%" }} label="Make Admin" variant="outlined" type="email" onChange={onAdminEmailValue} />
+            <Button sx={{ paddingY: 2, paddingX: 4 }} variant="contained" onClick={handaleMakeAdmin}> Save </Button>
             {success && <Alert severity="success">Make Admin successfully!</Alert>}
         </Box>
     );

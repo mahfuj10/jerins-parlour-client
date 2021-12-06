@@ -14,7 +14,8 @@ const MyOrder = () => {
         fetch(`http://localhost:5000/book/${user?.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
-    }, [user])
+    }, [orders])
+
     return (
         <>
             {

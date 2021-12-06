@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
+import './Pages/Style/Style.css';
 // npm install swiper@6.8.4
 
 function App() {

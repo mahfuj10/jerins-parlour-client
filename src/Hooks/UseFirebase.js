@@ -8,6 +8,7 @@ const UseFirebase = () => {
 
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [admin, setAdmin] = useState(false);
 
 
     const auth = getAuth();
@@ -82,11 +83,17 @@ const UseFirebase = () => {
             .then()
     }
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user?.email])
 
     return {
         handaleGoogleSign,
         user,
         error,
+        admin,
         logOut,
         registerUser
     }

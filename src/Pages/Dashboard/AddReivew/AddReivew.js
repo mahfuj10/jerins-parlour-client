@@ -1,15 +1,17 @@
-import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import { set, useForm } from "react-hook-form";
 import UseFirebase from '../../../Hooks/UseFirebase';
 
 const AddReivew = () => {
 
     const { user } = UseFirebase();
+    const { register, handleSubmit, reset } = useForm();
     const [name, setName] = useState('');
     const [profession, setProfession] = useState('');
-    const [description, setMessage] = useState('');
-    console.log(user)
+    const [description, setDescription] = useState('');
+    const [rating, setRating] = useState(1);
+
     const inputStyle = {
         height: "50px",
         width: "505px",
@@ -30,12 +32,10 @@ const AddReivew = () => {
     //         })
     // }
 
-    console.log(profession)
 
     if (name === undefined) setName(user?.displayName);
-    const userReview = { name, profession, description }
+    const userReview = { name, profession, description, rating }
     userReview.image = user?.photoURL;
-
 
     const handaleFormSubmit = e => {
         e.preventDefault();
@@ -48,6 +48,8 @@ const AddReivew = () => {
         })
             .then(res => res.json())
             .then(data => {
+                setProfession('');
+                setDescription('');
                 alert('sucessfully added feedback')
             })
     }
@@ -67,10 +69,21 @@ const AddReivew = () => {
                     type="text"
                     placeholder="Company's name, Designation" /><br />
                 <textarea
-                    onChange={e => setMessage(e.target.value)}
+                    onChange={e => setDescription(e.target.value)}
                     placeholder="Your Message"
                     style={{ border: "1px solid #fff" }}
                     cols="60" rows="5" /><br />
+
+                <select
+                    onChange={e => setRating(e.target.value)}
+                    placeholder="Your Message"
+                    style={{ padding: "5px 20px", marginTop: '20px' }} >
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                </select>  <br />
                 <input type="submit"
                     style={{
                         padding: '5px 30px', marginTop: "20px", color: "white", border: "none",

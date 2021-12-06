@@ -26,6 +26,8 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin/MakeAdmin';
 import AddReivew from '../AddReivew/AddReivew';
 import MyOrder from '../MyOrder/MyOrder';
 import ManageOrder from '../ManageOrder/ManageOrder';
+import UseFirebase from '../../../Hooks/UseFirebase';
+import AddService from '../AddService/AddService';
 
 const drawerWidth = 300;
 
@@ -37,19 +39,24 @@ function Dashboard(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const { admin } = UseFirebase();
+    console.log(admin);
 
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
             {/* <Link to="/book"><Button color="inherit">Book</Button></Link> */}
-            <Link to={`${url}`}><Button color="inherit">Book</Button></Link> <br />
-            <Box>
-                <Link to={`${url}/bookinglist`}><Button color="inherit">Booking List</Button></Link> <br />
-                <Link to={`${url}/review`}><Button color="inherit">Add Review</Button></Link>
-            </Box>
-            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link> <br />
-            <Link to={`${url}/manageorder`}><Button color="inherit">Manage All Order</Button></Link> <br />
+            <Link to={`${url}`}><Button color="inherit"></Button></Link> <br />
+
+            <Link to={`${url}/bookinglist`}><Button color="inherit">My Order</Button></Link> <br />
+            <Link to={`${url}/review`}><Button color="inherit">Add Review</Button></Link>
+            {admin && <Box>
+                <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link> <br />
+                <Link to={`${url}/addService`}><Button color="inherit">Add Serivce</Button></Link> <br />
+                <Link to={`${url}/manageorder`}><Button color="inherit">Manage All Order</Button></Link> <br />
+
+            </Box>}
 
         </div>
     );
@@ -134,6 +141,9 @@ function Dashboard(props) {
                     </Route>
                     <Route path={`${path}/manageorder`}>
                         <ManageOrder />
+                    </Route>
+                    <Route path={`${path}/addService`}>
+                        <AddService />
                     </Route>
                 </Switch>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutUs from '../AboutUs/AboutUs';
 import Contact from '../Contact/Contact';
 import Feedback from '../Feedback/Feedback';
 import Footer from '../Footer/Footer';
@@ -12,7 +13,7 @@ const Home = () => {
             <Navigation />
             <Header />
             <Services />
-            {/* <AboutUs /> */}
+            <AboutUs />
             <Feedback />
             <Contact />
             <Footer />

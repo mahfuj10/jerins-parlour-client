@@ -11,11 +11,11 @@ const Header = () => {
     }
 
     return (
-        <Box sx={headerStyle}>
-            <Container sx={{ pt: 20 }}>
+        <Box className="header" sx={headerStyle}>
+            <Container className="header-container" sx={{ pt: 20 }}>
                 <Grid container sx={{ alignItems: "center" }} spacing={2}>
                     <Grid item xs={12} md={6}>
-                        <Typography variant="h3" sx={{ fontWeight: 'bold', fontSize: "48px", mb: 2 }}>
+                        <Typography className="header-title" variant="h3" sx={{ fontWeight: 'bold', fontSize: "48px", mb: 2 }}>
                             BEAUTY SALON <br />
                             FOR EVERY WOMEN
                         </Typography>
