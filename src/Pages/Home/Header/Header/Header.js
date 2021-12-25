@@ -17,18 +17,19 @@ const Header = () => {
 
     const headerStyle = {
         background: '#FFF8F5',
-        width: "100vw",
-        height: "100vh"
+        height: "100vh",
+        display: 'grid',
+        alignItems: 'center'
     };
 
 
 
 
     return (
-        <Box className="header" sx={headerStyle}>
-            <Container className="header-container" sx={{ pt: 20 }}>
-                <Grid container sx={{ alignItems: "center" }} spacing={17}>
-                    <Grid item xs={12} md={6}>
+        <Box className="header" id="header" sx={headerStyle} >
+            <Container className="header-container">
+                <Grid container spacing={17} sx={{ display: "flex", alignItems: 'center' }}>
+                    <Grid item xs={12} md={6} >
                         <Typography data-aos="fade-up" className="header-title" variant="h3" sx={{ fontWeight: 'bold', fontSize: "48px", mb: 2 }}>
                             BEAUTY SALON <br />
                             FOR EVERY WOMEN
