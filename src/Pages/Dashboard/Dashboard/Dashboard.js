@@ -30,6 +30,7 @@ import AddService from '../AddService/AddService';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import useAuth from '../../../Hooks/UseAuth';
 import logo from '../../../Image/Group 33092.png';
+import { AiOutlineHome } from 'react-icons/ai';
 
 const drawerWidth = 300;
 
@@ -45,7 +46,7 @@ function Dashboard(props) {
 
 
     const drawer = (
-        <div style={{ marginLeft: "15%", marginTop: '10px' }}>
+        <section style={{ marginLeft: "15%", marginTop: '10px' }}>
             <Toolbar>
                 <Link to="/">
                     <img style={{ marginBottom: '20px' }} width="150" src={logo} alt="webLogo" />
@@ -53,17 +54,31 @@ function Dashboard(props) {
             </Toolbar>
             <Divider />
 
-            <NavLink to={`${url}`} activeStyle={{ color: "#F63E7B" }} style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}><Button color="inherit">
-                <Typography variant="h6"><BiCart /></Typography>
-                <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> My Order</Typography>
+            <Link to="/" style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
+                <Button color="inherit">
+                    <Typography variant="h6"><AiOutlineHome /></Typography>
+                    <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Home</Typography>
+                </Button></Link> <br />
 
-            </Button></NavLink> <br />
-            <NavLink activeStyle={{ color: "#F63E7B" }} to={`${url}/review`} style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}><Button color="inherit">
-                <Typography variant="h6"><MdOutlineReviews /></Typography>
-                <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Add Review</Typography>
-            </Button></NavLink>
-            {admin ?
-                <Box >
+            <NavLink to={`${url}`} activeStyle={{ color: "#F63E7B" }} style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
+                <Button color="inherit">
+                    <Typography variant="h6"><BiCart /></Typography>
+                    <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> My Order</Typography>
+
+                </Button>
+            </NavLink> <br />
+
+
+            <NavLink to={`${url}/review`}
+                activeStyle={{ color: "#F63E7B" }}
+                style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
+                <Button color="inherit">
+                    <Typography variant="h6"><MdOutlineReviews /></Typography>
+                    <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Add Review</Typography>
+                </Button>
+            </NavLink>
+            {admin &&
+                <Box>
                     <NavLink
                         activeStyle={{ color: "#F63E7B" }}
                         style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}
@@ -73,6 +88,7 @@ function Dashboard(props) {
                             <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Make Admin</Typography>
                         </Button>
                     </NavLink> <br />
+
                     <NavLink to={`${url}/addService`}
                         activeStyle={{ color: "#F63E7B" }}
                         style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
@@ -80,6 +96,7 @@ function Dashboard(props) {
                             <Typography variant="h6"><IoAdd /></Typography>
                             <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Add Serivce</Typography>
                         </Button></NavLink> <br />
+
                     <NavLink to={`${url}/manageorder`}
                         activeStyle={{ color: "#F63E7B" }}
                         style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
@@ -89,12 +106,10 @@ function Dashboard(props) {
                             <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Manage All Order</Typography>
                         </Button>
                     </NavLink> <br />
-
                 </Box>
-                :
-                <img src={spinner} width="50" alt="spinner" />
             }
-        </div >
+
+        </section>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -107,6 +122,7 @@ function Dashboard(props) {
 
                 position="fixed"
                 sx={{
+                    background: "#F63E7B",
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
                 }}

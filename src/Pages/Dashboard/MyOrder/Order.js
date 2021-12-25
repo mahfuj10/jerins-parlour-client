@@ -7,7 +7,7 @@ const Order = ({ order }) => {
     const { image, title, description, status } = order;
 
     return (
-        <Grid className="my-order-section" item xs={12} md={6} lg={4}>
+        <Grid className="my-order-section" item xs={12} md={12} lg={6}>
             <Paper className="order-card" elevation={2} sx={{ width: "415px", p: 3, mb: 4 }}>
                 <img
                     height="72" width="72"

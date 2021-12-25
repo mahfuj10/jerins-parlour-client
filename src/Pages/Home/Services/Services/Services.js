@@ -26,7 +26,10 @@ const Services = () => {
                 <Box>
                     <Grid container spacing={2}>
                         {
-                            services.map(service => <Service service={service} />)
+                            services.map(service => <Service
+                                key={service._id}
+                                service={service}
+                            />)
                         }
                     </Grid>
 

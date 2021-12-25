@@ -33,10 +33,10 @@ const Feedback = () => {
         initialSlide: 0,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 800,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
                     infinite: true,
                     dots: true
                 }
@@ -72,6 +72,7 @@ const Feedback = () => {
                         <Slider {...slickSlider} >
                             {
                                 userFeedbacks.map(feedback => <Box
+                                    key={feedback?._id}
                                     data-aos="fade-up"
                                     className="user-review"
                                 >

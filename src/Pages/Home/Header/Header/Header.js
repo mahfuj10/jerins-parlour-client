@@ -2,6 +2,7 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import AOS from 'aos';
+import '../../../Style/Style.css';
 import "aos/dist/aos.css";
 import girlImage from '../../../../Image/Image/headerBannerImage.png';
 

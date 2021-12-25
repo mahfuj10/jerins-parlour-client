@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, signOut, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import firebaseInitalize from "../Firebase/FirebaseInitalize";
 
@@ -38,7 +38,26 @@ const UseFirebase = () => {
 
             })
             .finally(() => setIsLoading(false));
-    }
+    };
+
+
+    // login with email and password
+    const loginUser = (email, password, location, history) => {
+        setIsLoading(true);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((user) => {
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+                setError('');
+            })
+            .catch((error) => {
+                setError(error.message);
+            })
+            .finally(() => setIsLoading(false))
+
+    };
+
+
 
     // google sign
 
@@ -109,6 +128,7 @@ const UseFirebase = () => {
         isLoading,
         admin,
         logOut,
+        loginUser,
         registerUser
     }
 

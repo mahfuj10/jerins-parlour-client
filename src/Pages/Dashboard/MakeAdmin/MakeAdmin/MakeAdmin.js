@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const MakeAdmin = () => {
 
     const [email, setEmail] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState('');
 
     const onAdminEmailValue = e => {
         setEmail(e.target.value);
@@ -23,17 +23,23 @@ const MakeAdmin = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount) {
-                    setSuccess(true);
+                    setSuccess('Admin make sucessfully');
+
                 }
             })
 
     }
 
     return (
+
         <Box sx={{ backgroundColor: "white", p: 10, width: "50%" }}>
+
+            {success && <Alert severity="success">{success}</Alert>}
+
             <TextField sx={{ width: "60%" }} label="Make Admin" variant="outlined" type="email" onChange={onAdminEmailValue} />
+
             <Button sx={{ paddingY: 2, paddingX: 4 }} variant="contained" onClick={handaleMakeAdmin}> Save </Button>
-            {success && <Alert severity="success">Make Admin successfully!</Alert>}
+
         </Box>
     );
 };

@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Alert, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { set, useForm } from "react-hook-form";
@@ -7,11 +7,11 @@ import UseFirebase from '../../../Hooks/UseFirebase';
 const AddReivew = () => {
 
     const { user } = UseFirebase();
-    const { register, handleSubmit, reset } = useForm();
     const [name, setName] = useState('');
     const [profession, setProfession] = useState('');
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState(1);
+    const [success, setSuccess] = useState('');
 
     const inputStyle = {
         height: "50px",
@@ -20,18 +20,6 @@ const AddReivew = () => {
         border: "1px solid #fff",
         marginBottom: "30px"
     }
-    //     fetch('https://radiant-hamlet-99209.herokuapp.com/book', {
-    //         method: "POST",
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(service)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             alert('sucessfully added')
-    //         })
-    // }
 
 
     if (name === undefined) setName(user?.displayName);
@@ -51,7 +39,7 @@ const AddReivew = () => {
             .then(data => {
                 setProfession('');
                 setDescription('');
-                alert('sucessfully added feedback')
+                setSuccess('Thanks for your feedback.Your feedback added on home page')
             })
     }
 
@@ -59,6 +47,9 @@ const AddReivew = () => {
 
     return (
         <Box className="add-review">
+
+            {success && <Alert severity="success">{success}</Alert>}
+
             <form onSubmit={handaleFormSubmit}>
                 <input
                     onBlur={e => setName(e.target.value)}

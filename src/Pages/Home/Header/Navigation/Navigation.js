@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import UseFirebase from '../../../../Hooks/UseFirebase';
 import { useHistory } from 'react-router-dom';
-import { Container, useTheme } from '@mui/material';
+import { Avatar, Container, useTheme } from '@mui/material';
 
 const Navigation = () => {
   const theme = useTheme();
@@ -35,17 +35,17 @@ const Navigation = () => {
       }
     },
     navItemContainer: {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         display: "none !important"
       }
     },
     navLogo: {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         float: "right"
       }
     },
     userInfo: {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         display: "none !important"
       }
     }
@@ -139,11 +139,13 @@ const Navigation = () => {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <img className={navLogo} src={logo} width="100" alt="navlogo" sx={{ ml: 37 }} />
+                <img className={navLogo} src={logo} width="120" alt="navlogo" sx={{ ml: 37 }} />
               </Typography>
-              <Typography className={userInfo} variant="body2" sx={{ flexGrow: 1, color: "black", fontWeight: 500, }}>
-                {user?.displayName}
-              </Typography>
+
+              <Box className={userInfo} variant="body2" sx={{ flexGrow: 1, display: 'flex ', alignItems: 'center', columnGap: '10px' }}>
+                {user.photoURL && <Avatar src={user.photoURL} alt="yourImage" />}
+                <Typography sx={{ color: "black", fontWeight: 500, }} variant='body2'>{user?.displayName}</Typography>
+              </Box>
 
               <Box className={navItemContainer} sx={{ mr: 5 }}>
                 <Link style={linkStyle} to="/">

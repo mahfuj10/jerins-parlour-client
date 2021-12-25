@@ -83,7 +83,7 @@ const ViewModal = ({ open, handleClose, id }) => {
                 <Fade in={open}>
                     <Box sx={style} >
                         <Grid container sx={{ alignItems: "center" }} spacing={0}>
-                            <Grid xs={6}>
+                            <Grid item xs={6}>
                                 <img width="150" src={image} alt="serviceImage" />
                             </Grid>
                             <Grid item xs={6} >

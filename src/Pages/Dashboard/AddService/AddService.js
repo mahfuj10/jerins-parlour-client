@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Input, TextField } from '@mui/material';
+import { Button, Input, TextField, Paper, Alert } from '@mui/material';
 
 const AddService = () => {
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    // title, image, description, price, _id 
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
     const [image, setImage] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [description, setDescription] = useState('');
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
+    formData.append('title', title);
+    formData.append('price', price);
+    formData.append('image', image);
+    formData.append('description', description);
 
-    const handleSubmit = e => {
+    const handaleAddService = e => {
+
         e.preventDefault();
         if (!image) {
             return;
@@ -24,8 +28,7 @@ const AddService = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    setSuccess('Doctor added successfully')
-                    console.log('doctor added successfully')
+                    setSuccess('service added successfully')
                 }
             })
             .catch(error => {
@@ -34,36 +37,40 @@ const AddService = () => {
     }
 
     return (
-        <div>
-            <h3>Add A Doctor</h3>
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    sx={{ width: '50%' }}
-                    label="Name"
-                    required
-                    onChange={e => setName(e.target.value)}
-                    variant="standard" />
-                <br />
-                <TextField
-                    sx={{ width: '50%' }}
-                    label="Email"
-                    type="email"
-                    required
-                    onChange={e => setEmail(e.target.value)}
-                    variant="standard" />
-                <br />
-                <Input
-                    accept="image/*"
-                    type="file"
-                    onChange={e => setImage(e.target.files[0])}
-                />
-                <br />
-                <Button variant="contained" type="submit">
-                    Add Doctor
-                </Button>
-            </form>
-            {success && <p style={{ color: 'green' }}>{success}</p>}
-        </div>
+
+
+        <form onSubmit={handaleAddService} >
+
+            {success && <Alert severity="success">{success}</Alert>}
+
+            <Paper elevation={2} sx={{ p: 4, width: "400px" }}>
+
+                <input
+                    onChange={e => setTitle(e.target.value)}
+                    required placeholder="Service Title"
+                    style={{ width: "100%", marginTop: "10px" }} /> <br /> <br />
+                <input
+                    style={{ width: "100%" }}
+                    type="number"
+                    placeholder='service cost'
+                    onChange={(e) => setPrice(e.target.value)} />
+                <br /> <br />
+                <label htmlFor="contained-button-file">
+                    <Input
+                        style={{ width: "100%" }}
+                        onChange={e => setImage(e.target.files[0])}
+                        accept="image/*" id="contained-button-file" multiple type="file" />
+
+                </label>
+                <br /> <br />
+                <textarea
+                    onChange={e => setDescription(e.target.value)}
+                    style={{ width: "100%" }}
+                    rows="4" placeholder="Description" />
+                <br /> <br />
+                <input type="Submit" />
+            </Paper>
+        </form >
     );
 };
 
