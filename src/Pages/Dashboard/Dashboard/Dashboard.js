@@ -3,31 +3,33 @@ import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { BiCart } from 'react-icons/bi';
+import { MdOutlineReviews } from 'react-icons/md';
+import { IoAdd } from 'react-icons/io5';
+import { CgMenuGridO } from 'react-icons/cg';
+import { IoMdPersonAdd } from 'react-icons/io';
 import {
     Switch,
     Route,
+    useRouteMatch,
+    NavLink,
     Link,
-    useRouteMatch
 } from "react-router-dom";
-import { Button } from '@mui/material';
+import spinner from '../../../Image/Icon/spinner.gif';
+import { Button, Divider } from '@mui/material';
 import MakeAdmin from '../MakeAdmin/MakeAdmin/MakeAdmin';
 import AddReivew from '../AddReivew/AddReivew';
 import MyOrder from '../MyOrder/MyOrder';
 import ManageOrder from '../ManageOrder/ManageOrder';
-import UseFirebase from '../../../Hooks/UseFirebase';
 import AddService from '../AddService/AddService';
+import AdminRoute from '../AdminRoute/AdminRoute';
+import useAuth from '../../../Hooks/UseAuth';
+import logo from '../../../Image/Group 33092.png';
 
 const drawerWidth = 300;
 
@@ -39,26 +41,60 @@ function Dashboard(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-    const { admin } = UseFirebase();
-    console.log(admin);
+    const { admin, isLoading } = useAuth();
+
 
     const drawer = (
-        <div>
-            <Toolbar />
+        <div style={{ marginLeft: "15%", marginTop: '10px' }}>
+            <Toolbar>
+                <Link to="/">
+                    <img style={{ marginBottom: '20px' }} width="150" src={logo} alt="webLogo" />
+                </Link>
+            </Toolbar>
             <Divider />
-            {/* <Link to="/book"><Button color="inherit">Book</Button></Link> */}
-            <Link to={`${url}`}><Button color="inherit"></Button></Link> <br />
 
-            <Link to={`${url}/bookinglist`}><Button color="inherit">My Order</Button></Link> <br />
-            <Link to={`${url}/review`}><Button color="inherit">Add Review</Button></Link>
-            {admin && <Box>
-                <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link> <br />
-                <Link to={`${url}/addService`}><Button color="inherit">Add Serivce</Button></Link> <br />
-                <Link to={`${url}/manageorder`}><Button color="inherit">Manage All Order</Button></Link> <br />
+            <NavLink to={`${url}`} activeStyle={{ color: "#F63E7B" }} style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}><Button color="inherit">
+                <Typography variant="h6"><BiCart /></Typography>
+                <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> My Order</Typography>
 
-            </Box>}
+            </Button></NavLink> <br />
+            <NavLink activeStyle={{ color: "#F63E7B" }} to={`${url}/review`} style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}><Button color="inherit">
+                <Typography variant="h6"><MdOutlineReviews /></Typography>
+                <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Add Review</Typography>
+            </Button></NavLink>
+            {admin ?
+                <Box >
+                    <NavLink
+                        activeStyle={{ color: "#F63E7B" }}
+                        style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}
+                        to={`${url}/makeAdmin`}>
+                        <Button color="inherit">
+                            <Typography variant="h6"><IoMdPersonAdd /></Typography>
+                            <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Make Admin</Typography>
+                        </Button>
+                    </NavLink> <br />
+                    <NavLink to={`${url}/addService`}
+                        activeStyle={{ color: "#F63E7B" }}
+                        style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
+                        <Button color="inherit">
+                            <Typography variant="h6"><IoAdd /></Typography>
+                            <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Add Serivce</Typography>
+                        </Button></NavLink> <br />
+                    <NavLink to={`${url}/manageorder`}
+                        activeStyle={{ color: "#F63E7B" }}
+                        style={{ textDecoration: "none", color: "#878787", fontSize: '20px' }}>
+                        <Button color="inherit">
 
-        </div>
+                            <Typography variant="h6"><CgMenuGridO /></Typography>
+                            <Typography variant="body2" sx={{ mt: 1, ml: 1 }}> Manage All Order</Typography>
+                        </Button>
+                    </NavLink> <br />
+
+                </Box>
+                :
+                <img src={spinner} width="50" alt="spinner" />
+            }
+        </div >
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -67,6 +103,8 @@ function Dashboard(props) {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar
+
+
                 position="fixed"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -89,6 +127,7 @@ function Dashboard(props) {
                 </Toolbar>
             </AppBar>
             <Box
+
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
@@ -109,6 +148,7 @@ function Dashboard(props) {
                     {drawer}
                 </Drawer>
                 <Drawer
+
                     variant="permanent"
                     sx={{
                         display: { xs: 'none', sm: 'block' },
@@ -120,31 +160,32 @@ function Dashboard(props) {
                 </Drawer>
             </Box>
             <Box
+
                 style={{ backgroundColor: "#F4F7FC", height: "100vh" }}
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
 
-                <Switch >
+                <Switch>
                     <Route exact path={path}>
-
+                        <MyOrder />
                     </Route>
                     <Route path={`${path}/bookinglist`}>
-                        <MyOrder />
+
                     </Route>
                     <Route path={`${path}/review`}>
                         <AddReivew />
                     </Route>
-                    <Route path={`${path}/makeAdmin`}>
+                    <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin />
-                    </Route>
-                    <Route path={`${path}/manageorder`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageorder`}>
                         <ManageOrder />
-                    </Route>
-                    <Route path={`${path}/addService`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addService`}>
                         <AddService />
-                    </Route>
+                    </AdminRoute>
                 </Switch>
 
             </Box>

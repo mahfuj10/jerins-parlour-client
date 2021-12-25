@@ -1,20 +1,29 @@
+import React, { useEffect } from 'react';
+import AOS from 'aos';
 import { Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import CountUp from 'react-countup';
-import React from 'react';
 import banner from '../../../Image/Image/aboutBanner.png'
 
 const AboutUs = () => {
+
+    // data aos
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+        });
+    }, []);
+
+
     return (
-        <Box sx={{ backgroundColor: "#FFF8F5", pt: 15, pb: 14 }}>
+        <Box className="about-section" sx={{ backgroundColor: "#FFF8F5", pt: 15, pb: 14 }}>
             <Container>
 
-                <Grid container sx={{ alignItems: "center" }} spacing={22}>
-                    <Grid item xs={12} md={6}>
+                <Grid className="aboutBox" container sx={{ alignItems: "center" }} spacing={22}>
+                    <Grid item xs={12} md={6} data-aos="fade-right">
                         <img width="580" height="381" src={banner} alt="aboutBanner" />
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} data-aos="fade-left">
 
                         <Typography variant="h3" sx={{ fontWeight: 600, fontSize: "34px", mb: 4 }}>Let us handle your screen <span style={{ color: "#F63E7B" }}>Professionally</span>.</Typography>
                         <Typography variant="body">With well writte codes, we build amazing apps for all platforms, mobile and web apps in general ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum</Typography>

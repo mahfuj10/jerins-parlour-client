@@ -4,6 +4,7 @@ import Rating from 'react-rating';
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import spinner from '../../../Image/Icon/spinner.gif';
+import AOS from 'aos';
 
 const Feedback = () => {
 
@@ -13,9 +14,17 @@ const Feedback = () => {
         fetch('https://radiant-hamlet-99209.herokuapp.com/review')
             .then(res => res.json())
             .then(data => setUserFeedbacks(data))
-    }, [])
+    }, []);
 
-    var settings = {
+    // data aos
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+        });
+    }, []);
+
+    // slick slider
+    const slickSlider = {
         dots: true,
         infinite: false,
         speed: 500,
@@ -60,9 +69,12 @@ const Feedback = () => {
                     </Box>
                     :
                     <Box sx={{ pt: 14, pb: 10 }}>
-                        <Slider {...settings} >
+                        <Slider {...slickSlider} >
                             {
-                                userFeedbacks.map(feedback => <Box >
+                                userFeedbacks.map(feedback => <Box
+                                    data-aos="fade-up"
+                                    className="user-review"
+                                >
                                     <Box sx={{ display: "flex", alignItems: "center" }}>
                                         <img
                                             style={{ borderRadius: "50%" }} width="64" height="64"
@@ -76,7 +88,12 @@ const Feedback = () => {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                    <Typography sx={{ mt: 2, textAlign: 'start', color: "#707070", width: "300px" }} variant="body2">{feedback?.description?.slice(0, 120)}</Typography>
+                                    <Typography
+                                        className="user-description"
+                                        sx={{ mt: 2, textAlign: 'start', color: "#707070", width: "300px" }}
+                                        variant="body2">
+                                        {feedback?.description?.slice(0, 120)}
+                                    </Typography>
                                     <Rating
                                         initialRating={feedback?.rating}
                                         style={{ fontSize: "19px", marginTop: 5, color: "#FFAC0C" }}

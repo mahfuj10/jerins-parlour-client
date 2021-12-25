@@ -1,3 +1,4 @@
+import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { set, useForm } from "react-hook-form";
@@ -39,7 +40,7 @@ const AddReivew = () => {
 
     const handaleFormSubmit = e => {
         e.preventDefault();
-        fetch('http://localhost:5000/review', {
+        fetch('https://radiant-hamlet-99209.herokuapp.com/review', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -57,7 +58,7 @@ const AddReivew = () => {
 
 
     return (
-        <Box>
+        <Box className="add-review">
             <form onSubmit={handaleFormSubmit}>
                 <input
                     onBlur={e => setName(e.target.value)}
@@ -93,7 +94,6 @@ const AddReivew = () => {
                 />
             </form>
             {/* <Button sx={{ px: 5, py: 1, mt: 3, backgroundColor: "#F63E7B" }} variant="contained" >Submit</Button> */}
-
         </Box>
     );
 };

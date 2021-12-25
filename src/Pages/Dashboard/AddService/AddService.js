@@ -17,7 +17,7 @@ const AddService = () => {
             return;
         }
 
-        fetch('http://localhost:5000/addService', {
+        fetch('https://radiant-hamlet-99209.herokuapp.com/addService', {
             method: 'POST',
             body: formData
         })

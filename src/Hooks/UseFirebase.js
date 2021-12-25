@@ -8,15 +8,16 @@ const UseFirebase = () => {
 
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
 
 
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
-
-    const registerUser = (email, password, name, history) => {
-
+    // create new user
+    const registerUser = (email, password, name, history, location) => {
+        setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
 
             .then((userCredential) => {
@@ -27,6 +28,8 @@ const UseFirebase = () => {
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
+                    const destination = location?.state?.from || '/';
+                    history.replace(destination);
                 }).catch((error) => {
                 });
             })
@@ -34,20 +37,25 @@ const UseFirebase = () => {
                 setError(error.message);
 
             })
+            .finally(() => setIsLoading(false));
     }
 
-    // handale google sign
+    // google sign
 
-    const handaleGoogleSign = () => {
+    const handaleGoogleSign = (location, history) => {
+        setIsLoading(true);
 
         signInWithPopup(auth, provider)
             .then((result) => {
                 setUser(result.user);
                 const user = result.user;
-                saveUser(user.email, user.displayName, 'POST')
+                saveUser(user.email, user.displayName, 'POST');
+                setError('');
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
             }).catch((error) => {
                 setError(error.message);
-            });
+            }).finally(() => setIsLoading(false));
     }
 
     useEffect(() => {
@@ -58,17 +66,18 @@ const UseFirebase = () => {
                 setUser({})
             }
         })
-    }, [])
+        setIsLoading(false);
+    }, [auth])
 
     const logOut = () => {
-
+        setIsLoading(true);
         signOut(auth)
             .then(() => {
                 setUser({})
             }).catch(error => {
                 setError(error.message)
             })
-
+            .finally(() => setIsLoading(false));
     }
 
     const saveUser = (email, displayName, method) => {
@@ -84,15 +93,20 @@ const UseFirebase = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        setIsLoading(true);
+        fetch(`https://radiant-hamlet-99209.herokuapp.com/users/${user?.email}`)
             .then(res => res.json())
-            .then(data => setAdmin(data.admin))
+            .then(data => {
+                setIsLoading(false);
+                setAdmin(data.admin)
+            })
     }, [user?.email])
 
     return {
         handaleGoogleSign,
         user,
         error,
+        isLoading,
         admin,
         logOut,
         registerUser

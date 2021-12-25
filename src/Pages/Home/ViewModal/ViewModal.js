@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import { BiCart } from 'react-icons/bi';
 import UseFirebase from '../../../Hooks/UseFirebase';
+import useAuth from '../../../Hooks/UseAuth';
+import { useHistory } from 'react-router';
 
 
 const style = {
@@ -29,9 +31,9 @@ const ViewModal = ({ open, handleClose, id }) => {
 
     const [service, setService] = useState({});
     const { image, title, description, price } = service;
-    const { user } = UseFirebase();
+    const { user } = useAuth();
 
-
+    const history = useHistory()
     useEffect(() => {
         fetch(`https://radiant-hamlet-99209.herokuapp.com/services/${id}`)
             .then(res => res.json())
@@ -39,6 +41,10 @@ const ViewModal = ({ open, handleClose, id }) => {
     }, [])
 
     const handaleAddToCart = () => {
+        if (!user?.email) {
+            history.push('/login');
+            return;
+        }
         service.email = user?.email;
         service.name = user?.displayName;
         service.status = 'pending';
@@ -78,16 +84,14 @@ const ViewModal = ({ open, handleClose, id }) => {
                     <Box sx={style} >
                         <Grid container sx={{ alignItems: "center" }} spacing={0}>
                             <Grid xs={6}>
-
                                 <img width="150" src={image} alt="serviceImage" />
-
                             </Grid>
                             <Grid item xs={6} >
-                                <Typography variant="h6">
+                                <Typography variant="h6" sx={{ color: '#F7568B' }}>
                                     {title}
                                 </Typography>
                                 <Typography sx={{ mt: 2 }} variant="body2">
-                                    {description}
+                                    {description}.
                                 </Typography>
                                 <Typography sx={{ mt: 2, color: "#F7568B" }} variant="h5">
                                     ${price}

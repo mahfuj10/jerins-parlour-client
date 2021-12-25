@@ -11,10 +11,10 @@ const MyOrder = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/book/${user?.email}`)
+        fetch(`https://radiant-hamlet-99209.herokuapp.com/book/${user?.email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
-    }, [orders])
+    }, [orders, user]);
 
     return (
         <>

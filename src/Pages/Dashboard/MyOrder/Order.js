@@ -7,8 +7,8 @@ const Order = ({ order }) => {
     const { image, title, description, status } = order;
 
     return (
-        <Grid item xs={12} md={6} lg={4}>
-            <Paper elevation={0} sx={{ width: "415px", p: 3, mb: 4 }}>
+        <Grid className="my-order-section" item xs={12} md={6} lg={4}>
+            <Paper className="order-card" elevation={2} sx={{ width: "415px", p: 3, mb: 4 }}>
                 <img
                     height="72" width="72"
                     src={image} alt="serviceImage"
